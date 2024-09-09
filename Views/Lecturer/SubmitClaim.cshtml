@@ -1,0 +1,17 @@
+﻿@model ContractMonthlyClaimSystem.Models.Claim
+
+<h2>Submit Claim</h2>
+
+<form asp-action="SubmitClaim" method="post" enctype="multipart/form-data">
+    <div>
+        <label for="claimDescription">Description:</label>
+        <input type="text" id="claimDescription" name="Description" required />
+    </div>
+    <div>
+        <label for="document">Upload Supporting Document:</label>
+        <input type="file" id="document" name="document" />
+    </div>
+    <div>
+        <button type="submit">Submit Claim</button>
+    </div>
+</form>

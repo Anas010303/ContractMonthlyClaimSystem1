@@ -1,0 +1,26 @@
+﻿<h2>Approve Claims</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Claim ID</th>
+            <th>Lecturer</th>
+            <th>Date Submitted</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Example row; this will be dynamic in the real application -->
+        <tr>
+            <td>1</td>
+            <td>John Doe</td>
+            <td>2024-09-01</td>
+            <td>
+                <form asp-action="ApproveClaim" method="post">
+                    <input type="hidden" name="claimId" value="1" />
+                    <button type="submit">Approve</button>
+                </form>
+            </td>
+        </tr>
+    </tbody>
+</table>
