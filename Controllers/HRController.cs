@@ -2,24 +2,23 @@
 
 namespace ContractClaimSystem.Controllers
 {
-    public class ManagerController : Controller
+    public class HRController : Controller
     {
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult ApproveClaim()
+        public IActionResult ProcessClaim()
         {
-            // Logic for approving claim
+            // Logic for processing claims
             return View();
         }
 
         public IActionResult TrackClaim()
         {
-            // Logic for tracking approved claims
+            // Logic for tracking processed claims
             return View();
         }
-       
     }
 }

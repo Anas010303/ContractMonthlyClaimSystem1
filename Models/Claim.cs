@@ -2,10 +2,14 @@
 {
     public class Claim
     {
-        public int ClaimID { get; set; }
-        public int UserID { get; set; }
-        public DateTime DateSubmitted { get; set; }
-        public int StatusID { get; set; }
-        public ClaimStatus Status { get; set; }
+        public int Id { get; set; }
+        public string LecturerName { get; set; }
+        public decimal HoursWorked { get; set; }
+        public decimal HourlyRate { get; set; }
+        public string Notes { get; set; }
+        public string Status { get; set; }
+        public string DocumentPath { get; set; }
+        public DateTime SubmittedOn { get; set; } = DateTime.Now;
+       
     }
 }

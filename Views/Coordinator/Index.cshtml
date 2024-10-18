@@ -1,3 +1,27 @@
-﻿<h2>Coordinator Dashboard</h2>
+﻿@{
+    ViewData["Title"] = "Programme Coordinator Dashboard";
+}
 
-<a asp-action="VerifyClaim">Verify Claims</a>
+<div class="container">
+    <h1 class="text-center">Programme Coordinator Dashboard</h1>
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Verify Claims</h5>
+                    <p class="card-text">Review and verify claims submitted by lecturers.</p>
+                    <a href="/Coordinator/VerifyClaim" class="btn btn-primary w-100">Verify Claims</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Track Claim Status</h5>
+                    <p class="card-text">Monitor the status of claims you have verified.</p>
+                    <a href="/Coordinator/TrackClaim" class="btn btn-primary w-100">Track Status</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

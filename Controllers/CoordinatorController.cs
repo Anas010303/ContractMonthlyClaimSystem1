@@ -1,26 +1,53 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ContractMonthlyClaimSystem.Data;
+using ContractMonthlyClaimSystem.Models;
 
 namespace ContractMonthlyClaimSystem.Controllers
 {
     public class CoordinatorController : Controller
     {
-        // GET: Coordinator/Index
+        private readonly ApplicationDbContext _context;
+
+        public CoordinatorController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        // Index Action
         public IActionResult Index()
         {
             return View();
         }
 
-        // GET: Coordinator/VerifyClaim
-        public IActionResult VerifyClaim()
+        // Verify Claims
+        public IActionResult VerifyClaims()
         {
-            return View();
+            var claims = _context.Claims.ToList();
+            return View(claims);
         }
 
         [HttpPost]
-        public IActionResult VerifyClaim(int claimId)
+        public async Task<IActionResult> ApproveClaim(int id)
         {
-            // Add logic for handling claim verification here
-            return RedirectToAction("Index");
+            var claim = await _context.Claims.FindAsync(id);
+            if (claim != null)
+            {
+                claim.Status = "Approved";
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(VerifyClaims));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RejectClaim(int id)
+        {
+            var claim = await _context.Claims.FindAsync(id);
+            if (claim != null)
+            {
+                claim.Status = "Rejected";
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(VerifyClaims));
         }
     }
 }

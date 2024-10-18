@@ -1,19 +1,41 @@
-﻿<h2>Track Claim</h2>
+﻿@model IEnumerable<ContractMonthlyClaimSystem.Models.Claim>
+@{
+    ViewData["Title"] = "Track Claim";
+}
 
-<table>
+<h2>Your Claims</h2>
+
+<table class="table table-bordered">
     <thead>
         <tr>
-            <th>Claim ID</th>
-            <th>Date Submitted</th>
+            <th>Lecturer Name</th>
+            <th>Hours Worked</th>
+            <th>Hourly Rate</th>
             <th>Status</th>
+            <th>Submitted On</th>
+            <th>Document</th>
         </tr>
     </thead>
     <tbody>
-        <!-- Example row; this will be dynamic in the real application -->
-        <tr>
-            <td>1</td>
-            <td>2024-09-01</td>
-            <td>Submitted</td>
-        </tr>
+        @foreach (var claim in Model)
+        {
+            <tr>
+                <td>@claim.LecturerName</td>
+                <td>@claim.HoursWorked</td>
+                <td>@claim.HourlyRate</td>
+                <td>@claim.Status</td>
+                <td>@claim.SubmittedOn.ToShortDateString()</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(claim.DocumentPath))
+                    {
+                        <a href="~/documents/@claim.DocumentPath" target="_blank">View Document</a>
+                    }
+                    else
+                    {
+                        <span>No Document</span>
+                    }
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

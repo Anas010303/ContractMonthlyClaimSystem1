@@ -1,3 +1,27 @@
-﻿<h2>Manager Dashboard</h2>
+﻿@{
+    ViewData["Title"] = "Academic Manager Dashboard";
+}
 
-<a asp-action="ApproveClaim">Approve Claims</a>
+<div class="container">
+    <h1 class="mb-4">Academic Manager Dashboard</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Approve Claims</h5>
+                    <p class="card-text">Approve claims verified by programme coordinators.</p>
+                    <a href="/Manager/ApproveClaim" class="btn btn-primary">Approve Claims</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Track Claim Status</h5>
+                    <p class="card-text">Monitor the status of approved claims.</p>
+                    <a href="/Manager/TrackClaim" class="btn btn-secondary">Track Status</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

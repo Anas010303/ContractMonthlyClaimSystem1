@@ -1,5 +1,27 @@
-﻿<h2>Lecturer Dashboard</h2>
+﻿@{
+    ViewData["Title"] = "Lecturer Dashboard";
+}
 
-<a asp-action="SubmitClaim">Submit a New Claim</a>
-<br />
-<a asp-action="TrackClaim">Track Submitted Claims</a>
+<div class="container">
+    <h1 class="text-center">Lecturer Dashboard</h1>
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Submit Claim</h5>
+                    <p class="card-text">Submit your monthly claims here with ease.</p>
+                    <a href="/Lecturer/SubmitClaim" class="btn btn-primary w-100">Submit Claim</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Track Claim</h5>
+                    <p class="card-text">Track the status of your submitted claims.</p>
+                    <a href="/Lecturer/TrackClaim" class="btn btn-primary w-100">Track Claim</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

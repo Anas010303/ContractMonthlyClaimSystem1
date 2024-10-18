@@ -1,33 +1,48 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ContractMonthlyClaimSystem.Data;
 using ContractMonthlyClaimSystem.Models;
 
 namespace ContractMonthlyClaimSystem.Controllers
 {
     public class LecturerController : Controller
     {
-        // GET: Lecturer/Index
+        private readonly ApplicationDbContext _context;
+
+        public LecturerController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        // Index Action
         public IActionResult Index()
         {
             return View();
         }
 
-        // GET: Lecturer/SubmitClaim
+        // Submit a Claim
+        [HttpGet]
         public IActionResult SubmitClaim()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult SubmitClaim(Claim model)
+        public async Task<IActionResult> SubmitClaim(Claim claim)
         {
-            // Add logic for handling claim submission here
-            return RedirectToAction("TrackClaim");
+            if (ModelState.IsValid)
+            {
+                _context.Claims.Add(claim);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(claim);
         }
 
-        // GET: Lecturer/TrackClaim
+        // Track Claims
         public IActionResult TrackClaim()
         {
-            return View();
+            var claims = _context.Claims.ToList();
+            return View(claims);
         }
     }
 }
