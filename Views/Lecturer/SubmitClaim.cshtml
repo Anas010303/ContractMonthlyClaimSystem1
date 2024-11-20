@@ -1,37 +1,26 @@
-﻿@model ContractMonthlyClaimSystem.Models.Claim
-@{
-    ViewData["Title"] = "Submit Claim";
-}
-
-<h2>Submit a Claim</h2>
-
-<form asp-action="SubmitClaim" enctype="multipart/form-data" method="post">
-    <div class="form-group">
-        <label for="LecturerName">Lecturer Name</label>
-        <input asp-for="LecturerName" class="form-control" />
-        <span asp-validation-for="LecturerName" class="text-danger"></span>
+﻿@model Claim
+<form asp-action="SubmitClaim" method="post">
+    <div>
+        <label>Hours Worked:</label>
+        <input type="number" asp-for="HoursWorked" id="hours" required />
     </div>
-    <div class="form-group">
-        <label for="HoursWorked">Hours Worked</label>
-        <input asp-for="HoursWorked" class="form-control" />
-        <span asp-validation-for="HoursWorked" class="text-danger"></span>
+    <div>
+        <label>Hourly Rate:</label>
+        <input type="number" asp-for="HourlyRate" id="rate" required />
     </div>
-    <div class="form-group">
-        <label for="HourlyRate">Hourly Rate</label>
-        <input asp-for="HourlyRate" class="form-control" />
-        <span asp-validation-for="HourlyRate" class="text-danger"></span>
+    <div>
+        <label>Total Payment:</label>
+        <input type="text" id="total" readonly />
     </div>
-    <div class="form-group">
-        <label for="Notes">Additional Notes</label>
-        <textarea asp-for="Notes" class="form-control"></textarea>
-    </div>
-    <div class="form-group">
-        <label for="document">Upload Supporting Document</label>
-        <input type="file" name="document" class="form-control" />
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit">Submit</button>
 </form>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+<script>
+    $(document).ready(function () {
+        $('#hours, #rate').on('input', function () {
+            const hours = parseFloat($('#hours').val()) || 0;
+            const rate = parseFloat($('#rate').val()) || 0;
+            $('#total').val(hours * rate);
+        });
+    });
+</script>

@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ContractMonthlyClaimSystem.Data;
+﻿using ContractMonthlyClaimSystem.Data;
 using ContractMonthlyClaimSystem.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ContractMonthlyClaimSystem.Controllers
 {
@@ -13,36 +14,38 @@ namespace ContractMonthlyClaimSystem.Controllers
             _context = context;
         }
 
-        // Index Action
+        // Default action to display the Index view
         public IActionResult Index()
         {
+
             return View();
         }
 
-        // Submit a Claim
-        [HttpGet]
+
+        // Action to submit a claim
         public IActionResult SubmitClaim()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> SubmitClaim(Claim claim)
+        public IActionResult SubmitClaim(Claim model)
         {
             if (ModelState.IsValid)
             {
-                _context.Claims.Add(claim);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                model.TotalPayment = model.HoursWorked * model.HourlyRate;
+                model.SubmissionDate = DateTime.Now;
+                _context.Claims.Add(model);
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Index)); // Redirect to Index after submission
             }
-            return View(claim);
+            return View(model);
         }
 
-        // Track Claims
+        // Action to track claims
         public IActionResult TrackClaim()
         {
-            var claims = _context.Claims.ToList();
-            return View(claims);
+            return RedirectToAction(nameof(Index)); // Redirect to Index for claims overview
         }
     }
 }

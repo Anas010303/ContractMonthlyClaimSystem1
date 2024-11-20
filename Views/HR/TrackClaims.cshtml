@@ -1,5 +1,8 @@
-﻿@model IEnumerable<Claim>
-<table>
+﻿@model IEnumerable<ContractMonthlyClaimSystem.Models.Claim>
+
+<h2>Track Claims</h2>
+
+<table class="table">
     <thead>
         <tr>
             <th>Lecturer Name</th>
@@ -8,7 +11,6 @@
             <th>Total Payment</th>
             <th>Submitted On</th>
             <th>Status</th>
-            <th>Document</th>
         </tr>
     </thead>
     <tbody>
@@ -18,12 +20,9 @@
                 <td>@claim.LecturerName</td>
                 <td>@claim.HoursWorked</td>
                 <td>@claim.HourlyRate</td>
-                <td>@claim.TotalPayment</td>
-                <td>@claim.SubmissionDate.ToShortDateString()</td>
+                <td>@(claim.HoursWorked * claim.HourlyRate)</td>
+                <td>@claim.SubmissionDate.ToString("yyyy-MM-dd")</td>
                 <td>@claim.Status</td>
-                <td>
-                    <a href="@claim.DocumentPath" target="_blank">View Document</a>
-                </td>
             </tr>
         }
     </tbody>

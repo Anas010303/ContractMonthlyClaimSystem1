@@ -1,12 +1,9 @@
-﻿@model List<Claim>
-
-<table class="table">
+﻿@model IEnumerable<Claim>
+<table>
     <thead>
         <tr>
-            <th>Lecturer Name</th>
-            <th>Hours Worked</th>
-            <th>Hourly Rate</th>
-            <th>Status</th>
+            <th>Lecturer</th>
+            <th>Total Payment</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -15,17 +12,15 @@
         {
             <tr>
                 <td>@claim.LecturerName</td>
-                <td>@claim.HoursWorked</td>
-                <td>@claim.HourlyRate</td>
-                <td>@claim.Status</td>
+                <td>@claim.TotalPayment</td>
                 <td>
                     <form asp-action="ApproveClaim" method="post">
-                        <input type="hidden" name="id" value="@claim.Id" />
-                        <button type="submit" class="btn btn-success">Approve</button>
+                        <input type="hidden" name="id" value="@claim.ClaimId" />
+                        <button type="submit">Approve</button>
                     </form>
                     <form asp-action="RejectClaim" method="post">
-                        <input type="hidden" name="id" value="@claim.Id" />
-                        <button type="submit" class="btn btn-danger">Reject</button>
+                        <input type="hidden" name="id" value="@claim.ClaimId" />
+                        <button type="submit">Reject</button>
                     </form>
                 </td>
             </tr>
